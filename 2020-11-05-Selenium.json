@@ -26,11 +26,6 @@
             "name": "[parameters('containerGroups_selenium_name')]",
             "properties": {
               "image": "[concat(parameters('containerGroups_selenium_name'), '/standalone-firefox-debug')]",
-              "command": [
-                "tail",
-                "-f",
-                "/dev/null"
-              ],
               "ports": [
                 {
                   "port": 4444
