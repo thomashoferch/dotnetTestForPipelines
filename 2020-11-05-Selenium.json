@@ -58,9 +58,6 @@
             }
           }
         ],
-        "ipAddress": {
-          "type": "Public"
-        },
         "osType": "Linux"
       }
     }
