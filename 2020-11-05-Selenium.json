@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "containerGroups_selenium_name": {
-      "type": "String"
+      "type": "string"
     }
   },
   "variables": {},
