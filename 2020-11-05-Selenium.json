@@ -1,0 +1,74 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "containerGroups_selenium_name": {
+      "type": "String"
+    }
+  },
+  "variables": {},
+  "resources": [
+    {
+      "type": "Microsoft.ContainerInstance/containerGroups",
+      "apiVersion": "2018-10-01",
+      "name": "[parameters('containerGroups_selenium_name')]",
+      "location": "westeurope",
+      "properties": {
+        "imageRegistryCredentials": [
+          {
+            "server": "qpointdevtools.azurecr.io",
+            "username": "1cc46e98-a5c5-4904-bb6d-6225441f3b2a",
+            "password": "70f9a69f-9538-4d87-aa91-dd335cdd0cd3"
+          }
+        ],
+        "containers": [
+          {
+            "name": "[parameters('containerGroups_selenium_name')]",
+            "properties": {
+              "image": "[concat(parameters('containerGroups_selenium_name'), '/standalone-firefox-debug')]",
+              "command": [
+                "tail",
+                "-f",
+                "/dev/null"
+              ],
+              "ports": [
+                {
+                  "port": 4444
+                },
+                {
+                  "port": 5900
+                }
+              ],
+              "environmentVariables": [
+                {
+                  "name": "SCREEN_WIDTH",
+                  "value": "1680"
+                },
+                {
+                  "name": "SCREEN_HEIGHT",
+                  "value": "1050"
+                }
+              ],
+              "resources": {
+                "requests": {
+                  "memoryInGB": 2.0,
+                  "cpu": 1.0
+                }
+              }
+            }
+          }
+        ],
+        "ipAddress": {
+          "ports": [
+            {
+              "protocol": "TCP",
+              "port": 443
+            }
+          ],
+          "type": "Public"
+        },
+        "osType": "Linux"
+      }
+    }
+  ]
+}
